@@ -3,6 +3,7 @@
 Some moded static-linked DirectShow filters 
 
 静态链接的LAVSplitter、LAVVideoDecoder、LAVAudioDecoder、VSFilter 
+ 
 稍微做了点改动： 
 
 + LAV系列默认开启所有格式的解码功能，不显示任务栏图标以及不向注册表写入、读取设置 
@@ -18,7 +19,7 @@ Some moded static-linked DirectShow filters
 
 #### VSFilter说明  
 
-因为是加了点东西，所以有新的GUID。VSFilter的功能不受影响。 
+因为是加了点东西，所以有新的GUID。VSFilter原有的功能不受影响。 
 
 用`CLSID_DirectVobSubMod`和`IID_IBaseFilter`拿到Filter，然后用`IID_IDirectPGS`拿到接口，调用里面的`SetPGSAndLoadImmediately`就行。将这个Filter连到`VideoDecoder`和`Renderer`中间就行，或者你可以只连`VideoDecoder`，然后调用`IGraphBuilder`的`Render`让他自己连接下游。要用到的东西我放在下面： 
 
@@ -33,4 +34,5 @@ public IUnknown {
 ```
  
 LAV的那个就是注释掉点代码，然后写死点设置，没啥看头。VSFilter里我动过的代码待会扔上来（虽然也没动多少） 
+ 
 就酱。
